@@ -1,9 +1,11 @@
 package com.bharat.devops.food.controller;
 
+import com.bharat.devops.food.dto.FoodCataloguePage;
+import com.bharat.devops.food.dto.FoodItemDTO;
 import com.bharat.devops.food.service.FoodService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /*
  * @author Bharat V. <bindian0509@gmail.com>
@@ -18,6 +20,17 @@ public class FoodController {
     public FoodController(FoodService foodService) {
         this.foodService = foodService;
     }
+    @PostMapping
+    public ResponseEntity<FoodItemDTO> addFoodItem(@RequestBody FoodItemDTO foodItemDTO){
+        FoodItemDTO foodItemSaved = foodService.addFoodItem(foodItemDTO);
+        return new ResponseEntity<>(foodItemSaved, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/restaurant/{restaurantId}")
+    public ResponseEntity<FoodCataloguePage> fetchRestauDetailsWithFoodMenu(@PathVariable Integer restaurantId){
+        FoodCataloguePage foodCataloguePage = foodService.fetchFoodCataloguePageDetails(restaurantId);
+        return new ResponseEntity<>(foodCataloguePage, HttpStatus.OK);
 
 
+    }
 }
