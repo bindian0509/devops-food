@@ -6,6 +6,7 @@ import com.bharat.devops.food.dto.Restaurant;
 import com.bharat.devops.food.entity.FoodItem;
 import com.bharat.devops.food.mapper.FoodItemMapper;
 import com.bharat.devops.food.repo.FoodItemRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,14 +18,10 @@ import java.util.List;
  */
 @Service
 public class FoodService {
-
-    private final RestTemplate restTemplate;
-    private final FoodItemRepo foodItemRepo;
-
-    public FoodService(RestTemplate restTemplate, FoodItemRepo foodItemRepo) {
-        this.restTemplate = restTemplate;
-        this.foodItemRepo = foodItemRepo;
-    }
+    @Autowired
+    RestTemplate restTemplate;
+    @Autowired
+    FoodItemRepo foodItemRepo;
 
     public FoodItemDTO addFoodItem(FoodItemDTO foodItemDTO) {
         FoodItem foodItemSavedInDB = foodItemRepo.save(FoodItemMapper.INSTANCE.mapFoodItemDTOToFoodItem(foodItemDTO));
@@ -45,7 +42,7 @@ public class FoodService {
     }
 
     private Restaurant fetchRestaurantDetailsFromRestaurantMS(Integer restaurantId) {
-        return restTemplate.getForObject("http://RESTAURANT-SERVICE/restaurant/fetchById/"+restaurantId, Restaurant.class);
+        return restTemplate.getForObject("http://RESTAURANT-SERVICE/restaurant/"+restaurantId, Restaurant.class);
     }
 
     private List<FoodItem> fetchFoodItemList(Integer restaurantId) {

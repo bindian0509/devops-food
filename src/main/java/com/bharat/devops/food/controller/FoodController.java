@@ -3,6 +3,7 @@ package com.bharat.devops.food.controller;
 import com.bharat.devops.food.dto.FoodCataloguePage;
 import com.bharat.devops.food.dto.FoodItemDTO;
 import com.bharat.devops.food.service.FoodService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class FoodController {
 
-    private final FoodService foodService;
-    public FoodController(FoodService foodService) {
-        this.foodService = foodService;
-    }
+    @Autowired
+    FoodService foodService;
+
     @PostMapping
     public ResponseEntity<FoodItemDTO> addFoodItem(@RequestBody FoodItemDTO foodItemDTO){
         FoodItemDTO foodItemSaved = foodService.addFoodItem(foodItemDTO);
