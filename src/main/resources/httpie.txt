@@ -1,0 +1,21 @@
+
+
+-- get a food catalog by restaurant by Id (numeric)
+http :9092/food/restaurant/1
+
+-- create a new food item on a restaurant
+http POST :9092/food \
+    itemName="Paneer Tikka Masala" \
+    itemDescription="Paneer tikka masala is an Indian dish of paneer tikka cheese served in a spiced gravy. It is a vegetarian alternative to chicken tikka masala." \
+    isVeg="true" \
+    price=360 \
+    restaurantId=1 \
+    quantity=0
+
+http POST :9092/food \
+    itemName="Malai Kofta" \
+    itemDescription="Fried balls of potato, cheese, and mixed veggies covered in a creamy sauce of blended nuts, chopped onions, tomatoes, and fragrant spices." \
+    isVeg="true" \
+    price=320 \
+    restaurantId=1 \
+    quantity=0
