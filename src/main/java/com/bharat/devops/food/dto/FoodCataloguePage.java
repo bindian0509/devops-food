@@ -18,4 +18,12 @@ public class FoodCataloguePage {
 
     private List<FoodItem> foodItemsList;
     private Restaurant restaurant;
+
+    public static FoodCataloguePage buildFoodCataloguePage (List<FoodItem> foodItemsList, Restaurant restaurant) {
+        FoodCataloguePage foodCataloguePage = new FoodCataloguePage();
+        foodCataloguePage.foodItemsList = foodItemsList;
+        foodCataloguePage.restaurant = restaurant;
+        return foodCataloguePage;
+    }
+
 }
